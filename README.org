@@ -1,0 +1,19 @@
+* About
+
+Log nadi dominance (ida/pingala).
+
+* Development
+
+To get an interactive development environment run:
+
+#+begin_src
+clojure -A:fig:build
+#+end_src
+
+This will auto compile and send all changes to the browser without the
+need to reload. After the compilation process is complete, you will
+get a Browser Connected REPL. An easy way to try it is:
+
+#+begin_src clojure
+(js/alert "Am I connected?")
+#+end_src
