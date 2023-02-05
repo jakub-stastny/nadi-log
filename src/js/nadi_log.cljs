@@ -1,10 +1,11 @@
 (ns ^:figwheel-hooks js.nadi-log
   (:require
    [goog.dom :as gdom]
+   [goog.i18n.DateTimeFormat]
    [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]))
 
-(println "This text is printed from src/js/nadi_log.cljs. Go ahead and edit it and see reloading in action.")
+(println "This is console.log")
 
 (defn multiply [a b] (* a b))
 
@@ -14,13 +15,24 @@
 (defn get-app-element []
   (gdom/getElement "app"))
 
-(defn hello-world []
+(defn test-component [] [:p "Test."])
+
+(defn main-app []
   [:div
-   [:h1 (:text @app-state)]
-   [:h3 "Edit this in src/js/nadi_log.cljs and watch it change!"]])
+   [:h1
+(.format
+ (goog.i18n.DateTimeFormat. "EEEE d/M")
+ (js/Date.))
+    ]
+
+                                        ;[:h1 (:text @app-state)]
+   [test-component]
+   [:p.someclass
+    "I have " [:strong "bold"]
+    [:span {:style {:color "red"}} " and red "] "text."]])
 
 (defn mount [el]
-  (rdom/render [hello-world] el))
+  (rdom/render [main-app] el))
 
 (defn mount-app-element []
   (when-let [el (get-app-element)]
